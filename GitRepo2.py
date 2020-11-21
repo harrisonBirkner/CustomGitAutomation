@@ -5,7 +5,8 @@ import time
 
 username = 'harrisonBirkner'
 password = 'GizkaFruit2402'
-newRepoName = input('>>')
+newRepoName = input('Repository Name: ')
+repoDesc = input('Repository Description: ')
 
 browser = webdriver.Chrome(executable_path='C:/chromedriver.exe')
 browser.get('http://github.com/login')
@@ -22,5 +23,5 @@ browser.find_elements_by_class_name("btn-primary")[0].click()
 
 print("Succesfully created repository {}".format(newRepoName))
 
-item = subprocess.Popen([r"C:\\Users\\harri\\OneDrive\\Desktop\\GitRepo2Helper.bat", newRepoName] , 
+item = subprocess.Popen([r"C:\\CustomGitAutomation\\GitRepo2Helper.bat", newRepoName, repoDesc] , 
                          shell=True, stdout=subprocess.PIPE)
