@@ -16,8 +16,8 @@ browser.find_elements_by_xpath("//input[@name='password']")[0].send_keys(passwor
 browser.find_elements_by_xpath("//input[@name='commit']")[0].click()
 browser.find_elements_by_xpath("/html/body/div[4]/div/aside[1]/div[2]/div[1]/div/h2/a")[0].click()
 browser.find_element_by_xpath("//input[@id='repository_name']").send_keys(newRepoName)
+browser.find_element_by_xpath("//input[@id='repository_description']").send_keys(repoDesc)
 browser.find_element_by_xpath("//input[@id='repository_visibility_private']").click()
-browser.find_element_by_xpath("/html/body/div[4]/main/div/form/div[4]/button").click()
 time.sleep(.5)
 browser.find_elements_by_class_name("btn-primary")[0].click()
 
