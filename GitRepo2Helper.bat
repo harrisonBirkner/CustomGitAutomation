@@ -2,6 +2,7 @@
 
 set newRepoName=%1
 set repoDesc=%2
+set envPick=%3
 
 cd C:/
 md %newRepoName%
@@ -13,4 +14,10 @@ git add .
 git commit -m "first commit"
 git push -u origin master
 echo All done!
-code .
+IF %envPick%=="v" (
+  start devenv
+) ELSE IF %envPick%=="c" (
+  code .
+) ELSE (
+  echo intelliJ support coming soon
+)
