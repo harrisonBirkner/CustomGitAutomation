@@ -1,23 +1,21 @@
 import os
+import time
 import subprocess
 from selenium import webdriver
-import time
+from dotenv import load_dotenv
 
 def repoInput():
-    envList = ['v', 'c', 'j']
+    envList = ['v', 'c', 'j', 'n']
     newRepoName = input('Repository Name: ')
     repoDesc = input('Repository Description: ')
-    envPick = input('Environment (v, c or j): ')
+    envPick = input('Environment ([V]isual Studio, VS [C]ode, intelli[J] or [N]one): ').lower()
 
     while envPick not in envList:
-        envPick = input('Environment (v, c or j): ')
+        envPick = input('Environment (v, c, j or n): ').lower()
 
     return newRepoName, repoDesc, envPick
 
-def repoCreation(newRepoName, repoDesc, envPick):
-    username = 'harrisonBirkner'
-    password = 'GizkaFruit2402'
-
+def repoCreation(newRepoName, repoDesc):
     browser = webdriver.Chrome(executable_path='C:/chromedriver.exe')
     browser.get('http://github.com/login')
 
@@ -30,15 +28,19 @@ def repoCreation(newRepoName, repoDesc, envPick):
     browser.find_element_by_xpath("//input[@id='repository_visibility_private']").click()
     time.sleep(.5)
     browser.find_elements_by_class_name("btn-primary")[0].click()
+    browser.quit()
+    print("Succesfully created repository {}".format(newRepoName))
 
 def main():
     newRepoName, repoDesc, envPick = repoInput()
-
-    repoCreation(newRepoName, repoDesc, envPick)
-
-    print("Succesfully created repository {}".format(newRepoName))
-
-    item = subprocess.Popen([r"C:\\CustomGitAutomation\\GitRepo2Helper.bat", newRepoName, repoDesc, envPick] , 
+    repoCreation(newRepoName, repoDesc)
+    os.makedirs(path + newRepoName)
+    subprocess.Popen([r"C:\\CustomGitAutomation\\GitRepo2Helper.bat", newRepoName, repoDesc, envPick, username, path] , 
                              shell=True)
+
+load_dotenv()
+username = os.getenv("USERNAME")
+password = os.getenv("PASSWORD")
+path = os.getenv("FILEPATH")
 
 main()
